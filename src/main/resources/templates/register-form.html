@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link href="https://getbootstrap.com/docs/4.3/examples/sign-in/" rel="canonical">
+
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+    <link href="../static/css/main.css" rel="stylesheet" th:href="@{/css/main.css}">
+    <!--<link href="../static/css/signin.css" th:href="@{/css/signin.css}" rel="stylesheet">-->
+    <title>Sign up</title>
+</head>
+<body>
+<div class="container mt-2">
+    <div class="offset-md-4 col-sm-4">
+        <div>
+            <form class="form-signin" method="post" th:action="@{/register}" th:object="${user}">
+                <h1 class="h3 mb-3 font-weight-normal text-center">Please sign up</h1>
+                <label style="font-weight: bold; font-size: 14px">FIRST NAME</label>
+                <input autofocus class="form-control mb-2" placeholder="First Name" required th:field="*{firstName}"
+                       type="text">
+                <label style="font-weight: bold; font-size: 14px">LAST NAME</label>
+                <input autofocus class="form-control mb-2" placeholder="Last Name" required th:field="*{lastName}"
+                       type="text">
+                <label style="font-weight: bold; font-size: 14px">EMAIL</label>
+                <input autofocus class="form-control mb-2" placeholder="Email" required th:field="*{email}"
+                       type="email">
+                <label style="font-weight: bold; font-size: 14px">PESEL</label>
+                <input autofocus class="form-control mb-2" placeholder="Pesel" required th:field="*{pesel}" type="text">
+                <label style="font-weight: bold; font-size: 14px">LOGIN</label>
+                <input autofocus class="form-control mb-2" placeholder="Username" required th:field="*{login}"
+                       type="text">
+                <label style="font-weight: bold; font-size: 14px">PASSWORD</label>
+                <input autofocus class="form-control mb-2" placeholder="Password" required th:field="*{password}"
+                       type="password">
+                <button class="btn btn-lg btn-dark btn-block mt-3" type="submit">Sign up</button>
+                <div class="text-center mt-3">
+                    Already have an account? <a href="#" th:href="@{/loginform}">Sign in.</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
