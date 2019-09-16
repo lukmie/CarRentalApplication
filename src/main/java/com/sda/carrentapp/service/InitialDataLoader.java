@@ -242,6 +242,7 @@ public class InitialDataLoader {
         User employee2 = User.builder()
                 .firstName("Lukasz")
                 .lastName("Mie")
+                .email("lm@email.com")
                 .role(Role.ADMIN)
                 .username("lukasz")
                 .password(encoder.encode("lukasz"))

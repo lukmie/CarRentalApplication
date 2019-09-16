@@ -32,7 +32,8 @@ public class UserController {
     }
 
     @PostMapping("/saveUser")
-    public String saveUser(@ModelAttribute("userDTO") UserDTO userDTO) {
+    public String saveUser(@ModelAttribute("user") UserDTO userDTO) {
+        System.out.println("*************************" + userDTO);
         userService.saveUser(userDTO);
         return "redirect:/users";
     }

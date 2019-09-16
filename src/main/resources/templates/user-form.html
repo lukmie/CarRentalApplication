@@ -46,6 +46,7 @@
                         <div>
                             <form action="#" method="post" th:action="@{/users/saveUser}" th:object="${user}">
                                 <input th:field="*{id}" type="hidden"/>
+                                <input th:field="*{role}" type="hidden"/>
                                 <label style="font-weight: bold; font-size: 14px">FIRST NAME</label>
                                 <input class="form-control mb-3 col-4" placeholder="First Name" th:field="*{firstName}"
                                        type="text"/>
@@ -55,12 +56,12 @@
                                 <label style="font-weight: bold; font-size: 14px">EMAIL</label>
                                 <input class="form-control mb-3 col-4" placeholder="Email" th:field="*{email}"
                                        type="email"/>
-                                <label style="font-weight: bold; font-size: 14px">LOGIN</label>
+                                <label style="font-weight: bold; font-size: 14px">USER NAME</label>
                                 <input class="form-control mb-3 col-4" placeholder="Login" th:field="*{username}"
                                        type="text"/>
                                 <label style="font-weight: bold; font-size: 14px">PASSWORD</label>
                                 <input class="form-control mb-3 col-4" placeholder="Password" th:field="*{password}"
-                                       type="password"/>
+                                       type="text"/>
                                 <label style="font-weight: bold; font-size: 14px">ADDRESS</label>
                                 <input class="form-control mb-3 col-4" placeholder="Address" th:field="*{address}"
                                        type="text"/>

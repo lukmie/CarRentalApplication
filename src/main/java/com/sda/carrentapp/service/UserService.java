@@ -6,6 +6,7 @@ import com.sda.carrentapp.entity.User;
 import com.sda.carrentapp.entity.UserDTO;
 import com.sda.carrentapp.entity.mapper.UserMapper;
 import com.sda.carrentapp.exception.UserNotFoundException;
+import com.sda.carrentapp.repository.DepartmentRepository;
 import com.sda.carrentapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,11 +26,13 @@ public class UserService implements UserDetailsService {
 
     private BCryptPasswordEncoder encoder;
     private UserRepository userRepository;
+    private DepartmentRepository departmentRepository;
 
     @Autowired
-    public UserService(BCryptPasswordEncoder encoder, UserRepository userRepository) {
+    public UserService(BCryptPasswordEncoder encoder, UserRepository userRepository, DepartmentRepository departmentRepository) {
         this.encoder = encoder;
         this.userRepository = userRepository;
+        this.departmentRepository = departmentRepository;
     }
 
     public UserService(UserRepository userRepository) {
@@ -51,7 +54,9 @@ public class UserService implements UserDetailsService {
     }
 
     public void saveUser(UserDTO userDTO) {
-//        userDTO.setPassword(encoder.encode(userDTO.getPassword()));
+        userDTO.setPassword(encoder.encode(userDTO.getPassword()));
+        userDTO.setEntityStatus(EntityStatus.ACTIVE);
+        departmentRepository.getDepartmentById(5L).ifPresent(userDTO::setDepartment);
         User userToSave = UserMapper.map(userDTO);
         userRepository.save(userToSave);
     }
