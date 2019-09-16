@@ -22,11 +22,15 @@ import java.util.List;
 
 @Service
 public class UserService implements UserDetailsService {
-    @Autowired
+
     private BCryptPasswordEncoder encoder;
+    private UserRepository userRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    public UserService(BCryptPasswordEncoder encoder, UserRepository userRepository) {
+        this.encoder = encoder;
+        this.userRepository = userRepository;
+    }
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -39,6 +43,11 @@ public class UserService implements UserDetailsService {
     public User getUserById(Long id) throws UserNotFoundException {
         return userRepository.getUserById(id)
                 .orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+    }
+
+    public User getUserByUserName(String userName) throws UserNotFoundException {
+        return userRepository.findUserByUsername(userName)
+                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + userName));
     }
 
     public void saveUser(UserDTO userDTO) {

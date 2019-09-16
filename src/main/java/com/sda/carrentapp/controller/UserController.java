@@ -19,26 +19,26 @@ public class UserController {
     }
 
     @GetMapping("")
-    public String getDepartments(Model model) {
+    public String getUsers(Model model) {
         model.addAttribute("users", userService.getUsers());
         return "users";
     }
 
     @GetMapping("/addUser")
-    public String addDepartmentView(Model model) {
+    public String addUserView(Model model) {
         User user = new User();
         model.addAttribute("user", user);
         return "user-form";
     }
 
     @PostMapping("/saveUser")
-    public String saveDepartment(@ModelAttribute("userDTO") UserDTO userDTO) {
+    public String saveUser(@ModelAttribute("userDTO") UserDTO userDTO) {
         userService.saveUser(userDTO);
         return "redirect:/users";
     }
 
     @GetMapping("/updateUser/{id}")
-    public String updateDepartmentView(@PathVariable("id") Long id, Model model) throws UserNotFoundException {
+    public String updateUserView(@PathVariable("id") Long id, Model model) throws UserNotFoundException {
         model.addAttribute("user", userService.getUserById(id));
         return "user-form";
     }

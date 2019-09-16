@@ -240,12 +240,12 @@ public class InitialDataLoader {
                 .build();
 
         User employee2 = User.builder()
-                .firstName("Adam")
-                .lastName("Zieliński")
-                .role(Role.EMPLOYEE)
-                .username("adam2")
-                .password(encoder.encode("zielinski"))
-                .department(department1)
+                .firstName("Lukasz")
+                .lastName("Mie")
+                .role(Role.ADMIN)
+                .username("lukasz")
+                .password(encoder.encode("lukasz"))
+                .address("Gdańsk")
                 .entityStatus(EntityStatus.ACTIVE)
                 .build();
 
@@ -313,10 +313,5 @@ public class InitialDataLoader {
                 (Arrays.asList(employee1, employee2, employee3, employee4, employee5, employee6, employee7, employee8));
 
         employees.forEach(employeeRepository::save);
-
-//        userServiceSecurity.createUser(new SignUpRequest("jacek", "jacek", "ROLE_ADMIN"));
-//        userServiceSecurity.createUser(new SignUpRequest("lukasz", "lukasz", "ROLE_ADMIN"));
-//        userServiceSecurity.createUser(new SignUpRequest("bartek", "bartek", "ROLE_ADMIN"));
-//        userServiceSecurity.createUser(new SignUpRequest("user", "user", "USER"));
     }
 }

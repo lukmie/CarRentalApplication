@@ -23,7 +23,9 @@
             <form class="form-inline my-2 my-lg-0">
                 <ul class="navbar-nav mr-auto pr-4">
                     <li class="nav-item active">
-                        <a class="nav-link enabled" href="#" th:text="${username}">username</a>
+                        <a class="nav-link enabled" href="#"
+                           th:href="@{|/userSettings/${username}|}"
+                           th:text="${username}">username</a>
                     </li>
                 </ul>
                 <div sec:authorize="isAuthenticated()">
