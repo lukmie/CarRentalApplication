@@ -24,8 +24,11 @@
                 <ul class="navbar-nav mr-auto pr-4">
                     <li class="nav-item active">
                         <form method="post" th:action="@{/userPanel/accountSettings}">
-                            <button class="btn" style="color: white" th:text="${username}" type="submit">username
-                            </button>
+                            <div sec:authorize="isAuthenticated()">
+                                <button class="btn btn-link nav-link" style="color: white" type="submit">
+                                    <span sec:authentication="name">Bob</span>
+                                </button>
+                            </div>
                         </form>
                     </li>
                 </ul>

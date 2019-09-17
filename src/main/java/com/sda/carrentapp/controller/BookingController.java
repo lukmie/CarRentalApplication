@@ -51,7 +51,6 @@ public class BookingController {
     @GetMapping("/booking/selectDateAndLocation")
     public String bookingView(Model model) {
         UserBooking userBooking = new UserBooking();
-//        Booking booking = new Booking();
         List<Department> departments = departmentService.getDepartments();
         model.addAttribute("userBooking", userBooking);
         model.addAttribute("departments", departments);

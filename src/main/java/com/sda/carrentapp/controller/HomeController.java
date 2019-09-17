@@ -2,12 +2,13 @@ package com.sda.carrentapp.controller;
 
 import com.sda.carrentapp.service.CarManager;
 import com.sda.carrentapp.service.DepartmentService;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/")
 public class HomeController {
 
     private CarManager carManager;
@@ -18,13 +19,8 @@ public class HomeController {
         this.departmentService = departmentService;
     }
 
-    @GetMapping("")
-    public String showHomeView(Model model) {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        if ("anonymousUser".equals(username)) {
-            username = "";
-        }
-        model.addAttribute("username", username);
+    @GetMapping
+    public String showHomeView() {
         return "main/index";
     }
 

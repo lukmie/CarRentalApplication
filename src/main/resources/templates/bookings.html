@@ -27,24 +27,23 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column mt-3">
                         <li class="nav-item">
-                            <span data-feather="file"></span>
+                            <a class="nav-link" href="#" th:href="@{/}">Home Page</a>
+                        </li>
+                        <li class="nav-item">
                             <form method="post" th:action="@{/userPanel/accountSettings}">
                                 <button class="btn btn-link nav-link" type="submit">Account Settings</button>
                             </form>
-                            <!--<a class="nav-link" href="#" th:href="@{addContact}">-->
-                            <!--<span data-feather="home"></span>-->
-                            <!--Account Settings-->
-                            <!--</a>-->
                         </li>
                         <li class="nav-item">
                             <form method="post" th:action="@{/userPanel/bookings}">
                                 <button class="btn btn-link nav-link" type="submit">Bookings</button>
                             </form>
-
-                            <!--<a class="nav-link" href="#" th:href="@{|/users/updateUser/${user.id}|}">-->
-                            <!--<span data-feather="file"></span>-->
-                            <!--Bookings-->
-                            <!--</a>-->
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Send email [Not available]</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" th:href="@{/logout}">Sign out</a>
                         </li>
                     </ul>
                 </div>
