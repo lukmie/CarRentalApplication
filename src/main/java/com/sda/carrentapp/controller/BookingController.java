@@ -1,14 +1,16 @@
 package com.sda.carrentapp.controller;
 
 import com.sda.carrentapp.common.Message;
-import com.sda.carrentapp.entity.Car;
-import com.sda.carrentapp.entity.Department;
-import com.sda.carrentapp.entity.UserBooking;
+import com.sda.carrentapp.entity.*;
 import com.sda.carrentapp.exception.BookingNotFoundException;
 import com.sda.carrentapp.exception.RentStartDateIsNullException;
+import com.sda.carrentapp.exception.UserNotFoundException;
 import com.sda.carrentapp.service.BookingService;
 import com.sda.carrentapp.service.CarManager;
 import com.sda.carrentapp.service.DepartmentService;
+import com.sda.carrentapp.service.UserService;
+import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,8 @@ import java.time.Period;
 import java.util.List;
 import java.util.Set;
 
+@AllArgsConstructor
+
 @Controller
 public class BookingController {
 
@@ -27,13 +31,7 @@ public class BookingController {
     private CarManager carManager;
     private DepartmentService departmentService;
     private UserBooking userBooking;
-
-    public BookingController(BookingService bookingService, CarManager carManager, DepartmentService departmentService, UserBooking userBooking) {
-        this.bookingService = bookingService;
-        this.carManager = carManager;
-        this.departmentService = departmentService;
-        this.userBooking = userBooking;
-    }
+    private UserService userService;
 
     @GetMapping("/booking/allBookings")
     public String bookingsView(Model model) {
@@ -52,7 +50,7 @@ public class BookingController {
 
     @GetMapping("/booking/selectDateAndLocation")
     public String bookingView(Model model) {
-       UserBooking userBooking = new UserBooking();
+        UserBooking userBooking = new UserBooking();
 //        Booking booking = new Booking();
         List<Department> departments = departmentService.getDepartments();
         model.addAttribute("userBooking", userBooking);
@@ -73,12 +71,20 @@ public class BookingController {
     }
 
     @PostMapping("/booking/selectCar/{id}")
-    public String addCarToBooking(@PathVariable Long id, @ModelAttribute("userBooking") UserBooking userBooking) {
+    public String addCarToBooking(@PathVariable Long id, @ModelAttribute("userBooking") UserBooking userBooking, Model model) throws UserNotFoundException {
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = userService.getUserByUserName(userName);
+
         Car selectedCar = carManager.getCarById(id);
         userBooking.setCar(selectedCar);
         bookingService.addBooking(userBooking);
-//        userBooking.clear();
-        return "redirect:/booking/allBookings";
+
+        if (user.getRole().equals(Role.USER)) {
+            bookingsViewModelAttributes(model);
+            return "redirect:/userPanel/bookings";
+        } else {
+            return "redirect:/booking/allBookings";
+        }
     }
 
     @PostMapping("/booking/delete/{id}")
@@ -113,5 +119,12 @@ public class BookingController {
             return "message";
         }
         return "redirect:/booking/allBookings";
+    }
+
+    private void bookingsViewModelAttributes(Model model) throws UserNotFoundException {
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        model.addAttribute("booked", bookingService.getAllBookingsByUserName(userName));
+        model.addAttribute("user", userService.getUserByUserName(userName));
+        model.addAttribute("username", userName);
     }
 }

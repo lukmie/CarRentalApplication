@@ -25,7 +25,7 @@ public class UserPanelController {
         this.bookingService = bookingService;
     }
 
-    @PostMapping("/userSettings")
+    @PostMapping("/accountSettings")
     public String showUserSettings(Model model) throws UserNotFoundException {
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
         model.addAttribute("user", userService.getUserByUserName(userName));
