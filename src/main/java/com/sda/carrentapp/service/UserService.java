@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -51,6 +52,10 @@ public class UserService implements UserDetailsService {
     public User getUserByUserName(String userName) throws UserNotFoundException {
         return userRepository.findUserByUsername(userName)
                 .orElseThrow(() -> new UserNotFoundException("User not found with userName: " + userName));
+    }
+
+    public Optional<User> getOptionalUserByUserName(String userName) {
+        return userRepository.findUserByUsername(userName);
     }
 
     public void saveUser(UserDTO userDTO) {
