@@ -7,7 +7,6 @@
     <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
     <link href="../static/css/main.css" rel="stylesheet" th:href="@{/css/main.css}">
-    <!--<link href="../static/css/signin.css" th:href="@{/css/signin.css}" rel="stylesheet">-->
     <title>Sign up</title>
 </head>
 <body>
@@ -25,17 +24,22 @@
                 <label style="font-weight: bold; font-size: 14px">EMAIL</label>
                 <input autofocus class="form-control mb-2" placeholder="Email" required th:field="*{email}"
                        type="email">
-                <label style="font-weight: bold; font-size: 14px">PESEL</label>
-                <input autofocus class="form-control mb-2" placeholder="Pesel" required th:field="*{pesel}" type="text">
-                <label style="font-weight: bold; font-size: 14px">LOGIN</label>
-                <input autofocus class="form-control mb-2" placeholder="Username" required th:field="*{login}"
+                <label style="font-weight: bold; font-size: 14px">ADDRESS</label>
+                <input autofocus class="form-control mb-2" placeholder="Address" required th:field="*{address}"
                        type="text">
+                <div class="form-group" th:classappend="${#fields.hasErrors('login')}? 'has-error':''">
+                    <label style="font-weight: bold; font-size: 14px">USER NAME</label>
+                    <input autofocus class="form-control mb-2" placeholder="User Name" required th:field="*{username}"
+                           type="text">
+                    <p class="error-message" th:each="error : ${#fields.errors('username')}" th:text="${error}">
+                        Validation error</p>
+                </div>
                 <label style="font-weight: bold; font-size: 14px">PASSWORD</label>
                 <input autofocus class="form-control mb-2" placeholder="Password" required th:field="*{password}"
                        type="password">
                 <button class="btn btn-lg btn-dark btn-block mt-3" type="submit">Sign up</button>
                 <div class="text-center mt-3">
-                    Already have an account? <a href="#" th:href="@{/loginform}">Sign in.</a>
+                    Already have an account? <a href="#" th:href="@{/login-form}">Sign in.</a>
                 </div>
             </form>
         </div>

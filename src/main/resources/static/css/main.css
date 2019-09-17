@@ -8,3 +8,7 @@
     border-radius: 5px;
     border-color: #49c5b6;
 }
+
+.error-message {
+    color: #a94442;
+}
