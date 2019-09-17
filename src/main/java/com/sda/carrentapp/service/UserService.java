@@ -50,7 +50,7 @@ public class UserService implements UserDetailsService {
 
     public User getUserByUserName(String userName) throws UserNotFoundException {
         return userRepository.findUserByUsername(userName)
-                .orElseThrow(() -> new UserNotFoundException("User not found with id: " + userName));
+                .orElseThrow(() -> new UserNotFoundException("User not found with userName: " + userName));
     }
 
     public void saveUser(UserDTO userDTO) {

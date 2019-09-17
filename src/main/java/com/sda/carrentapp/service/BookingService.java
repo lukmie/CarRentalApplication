@@ -47,6 +47,14 @@ public class BookingService {
                 .orElseThrow(() -> new BookingNotFoundException("Booking not found with id: " + id));
     }
 
+    public List<Booking> getAllBookingsByUserId(Long id) {
+        return bookingRepository.findAllBookingsByUserId(id);
+    }
+
+    public List<Booking> getAllBookingsByUserName(String userName) {
+        return bookingRepository.findAllBookingsByUserName(userName);
+    }
+
     public void deleteBooking(Long id) throws BookingNotFoundException {
         Booking booking = bookingRepository.getBookingById(id)
                 .orElseThrow(() -> new BookingNotFoundException("Booking not found with id: " + id));

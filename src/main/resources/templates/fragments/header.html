@@ -20,12 +20,13 @@
                     <a class="nav-link" href="#" th:href="@{/branches}">Branches <span class="sr-only">(current)</span></a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
+            <div class="form-inline my-2 my-lg-0">
                 <ul class="navbar-nav mr-auto pr-4">
                     <li class="nav-item active">
-                        <a class="nav-link enabled" href="#"
-                           th:href="@{|/userSettings/${username}|}"
-                           th:text="${username}">username</a>
+                        <form method="post" th:action="@{/userPanel/userSettings}">
+                            <button class="btn" style="color: white" th:text="${username}" type="submit">username
+                            </button>
+                        </form>
                     </li>
                 </ul>
                 <div sec:authorize="isAuthenticated()">
@@ -39,7 +40,7 @@
                         Sign in
                     </a>
                 </div>
-            </form>
+            </div>
         </div>
     </nav>
 </div>

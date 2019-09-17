@@ -25,16 +25,26 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column mt-3">
                         <li class="nav-item">
-                            <a class="nav-link" href="#" th:href="@{addContact}">
-                                <span data-feather="home"></span>
-                                Account Settings
-                            </a>
+                            <span data-feather="file"></span>
+                            <form method="post" th:action="@{/userPanel/userSettings}">
+                                <button class="btn btn-link nav-link" type="submit">Account Settings</button>
+                            </form>
+                            <!--<a class="nav-link" href="#" th:href="@{addContact}">-->
+                            <!--<span data-feather="home"></span>-->
+                            <!--Account Settings-->
+                            <!--</a>-->
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#" th:href="@{|/users/updateUser/${user.id}|}">
-                                <span data-feather="file"></span>
-                                Bookings
-                            </a>
+
+                            <!--<form method="post" th:action="@{|/userSettings/bookings/${user.id}|}">-->
+                            <form method="post" th:action="@{/userPanel/bookings}">
+                                <button class="btn btn-link nav-link" type="submit">Bookings</button>
+                            </form>
+
+                            <!--<a class="nav-link" href="#" th:href="@{|/users/updateUser/${user.id}|}">-->
+                            <!--<span data-feather="file"></span>-->
+                            <!--Bookings-->
+                            <!--</a>-->
                         </li>
                     </ul>
                 </div>
@@ -47,6 +57,8 @@
                             <form action="#" method="post" th:action="@{/users/saveUser}" th:object="${user}">
                                 <input th:field="*{id}" type="hidden"/>
                                 <input th:field="*{role}" type="hidden"/>
+                                <input th:field="*{username}" type="hidden"/>
+                                <input th:field="*{password}" type="hidden"/>
                                 <label style="font-weight: bold; font-size: 14px">FIRST NAME</label>
                                 <input class="form-control mb-3 col-4" placeholder="First Name" th:field="*{firstName}"
                                        type="text"/>
@@ -56,12 +68,14 @@
                                 <label style="font-weight: bold; font-size: 14px">EMAIL</label>
                                 <input class="form-control mb-3 col-4" placeholder="Email" th:field="*{email}"
                                        type="email"/>
-                                <label style="font-weight: bold; font-size: 14px">USER NAME</label>
-                                <input class="form-control mb-3 col-4" placeholder="Login" th:field="*{username}"
-                                       type="text"/>
-                                <label style="font-weight: bold; font-size: 14px">PASSWORD</label>
-                                <input class="form-control mb-3 col-4" placeholder="Password" th:field="*{password}"
-                                       type="text"/>
+
+                                <!--<label style="font-weight: bold; font-size: 14px">USER NAME</label>-->
+                                <!--<input class="form-control mb-3 col-4" placeholder="Login" th:field="*{username}"-->
+                                <!--type="text"/>-->
+                                <!--<label style="font-weight: bold; font-size: 14px">PASSWORD</label>-->
+                                <!--<input class="form-control mb-3 col-4" placeholder="Password" th:field="*{password}"-->
+                                <!--type="text"/>-->
+
                                 <label style="font-weight: bold; font-size: 14px">ADDRESS</label>
                                 <input class="form-control mb-3 col-4" placeholder="Address" th:field="*{address}"
                                        type="text"/>
