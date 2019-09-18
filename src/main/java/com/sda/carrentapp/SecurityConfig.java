@@ -29,7 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/userPanel").hasRole("USER")
                 .antMatchers("/cars").hasAnyRole("ADMIN", "MANAGER", "EMPLOYEE")
                 .antMatchers("/employees").hasRole("ADMIN")
-                .antMatchers("/departments").hasRole("ADMIN")
+                .antMatchers("/departments").hasAnyRole("ADMIN", "MANAGER", "EMPLOYEE")
                 .and()
                 .formLogin().loginPage("/login-form").permitAll() // przekierowanie na widok logowania
                 .loginProcessingUrl("/login").permitAll()

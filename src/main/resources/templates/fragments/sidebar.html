@@ -13,7 +13,7 @@
                            href="#homeSubmenu">Cars</a>
                         <ul class="collapse list-unstyled" id="homeSubmenu">
                             <li>
-                                <a class="nav-link pl-5" href="#" style="background-color: #e6e9ec" th:href="@{/cars}">All
+                                <a class="nav-link pl-5" href="#" style="background-color: #e6e9ec" th:href="@{/cars}">Show
                                     cars</a>
                             </li>
                             <li>
@@ -25,16 +25,18 @@
 
                     <li class="nav-item">
                         <a aria-expanded="false" class="dropdown-toggle nav-link" data-toggle="collapse"
-                           href="#pageSubmenu">Pages</a>
+                           href="#pageSubmenu">Departments</a>
                         <ul class="collapse list-unstyled" id="pageSubmenu">
                             <li>
-                                <a class="nav-link ml-4" href="#">Home 21</a>
+                                <a class="nav-link pl-5" href="#" style="background-color: #e6e9ec"
+                                   th:href="@{/departments}">Show departments</a>
+                            </li>
+                            <li>/addDepartment
+                                <a class="nav-link pl-5" href="#" style="background-color: #e6e9ec"
+                                   th:href="@{/departments/addDepartment}">New department</a>
                             </li>
                             <li>
-                                <a class="nav-link ml-4" href="#">Home 2</a>
-                            </li>
-                            <li>
-                                <a class="nav-link ml-4" href="www.wp.pl">Home 3</a>
+                                <a class="nav-link pl-5" href="#">Home 3</a>
                             </li>
                         </ul>
                     </li>

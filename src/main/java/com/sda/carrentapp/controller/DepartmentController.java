@@ -20,7 +20,7 @@ public class DepartmentController {
         this.carManager = carManager;
     }
 
-    @GetMapping("")
+    @GetMapping
     public String getDepartments(Model model) {
         model.addAttribute("departments", departmentService.getDepartments());
         return "departments";
