@@ -1,21 +1,57 @@
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
 <div th:fragment="sidebar">
     <div sec:authorize="isAuthenticated()">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
             <div class="sidebar-sticky">
+
                 <ul class="nav flex-column mt-3">
+
+
+                    <li class="active nav-item">
+                        <a aria-expanded="false" class="dropdown-toggle nav-link" data-toggle="collapse"
+                           href="#homeSubmenu">Home</a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                            <li>
+                                <a class="nav-link ml-4" href="#">Home 1</a>
+                            </li>
+                            <li>
+                                <a class="nav-link ml-4" href="#">Home 2</a>
+                            </li>
+                            <li>
+                                <a class="nav-link ml-4" href="www.wp.pl">Home 3</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a aria-expanded="false" class="dropdown-toggle nav-link" data-toggle="collapse"
+                           href="#pageSubmenu">Pages</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu">
+                            <li>
+                                <a class="nav-link ml-4" href="#">Home 21</a>
+                            </li>
+                            <li>
+                                <a class="nav-link ml-4" href="#">Home 2</a>
+                            </li>
+                            <li>
+                                <a class="nav-link ml-4" href="www.wp.pl">Home 3</a>
+                            </li>
+                        </ul>
+                    </li>
+
+
                     <li class="nav-item">
                         <a class="nav-link" href="#" th:href="@{/}">Home Page</a>
                     </li>
                     <li class="nav-item">
                         <form method="post" th:action="@{/userPanel/accountSettings}">
-                            <button class="btn btn-link nav-link" type="submit">Account Settings</button>
+                            <button class="accordion btn btn-link nav-link" type="submit">Account Settings</button>
                         </form>
                     </li>
                     <li class="nav-item">
-                        <form method="post" th:action="@{/userPanel/bookings}">
-                            <button class="btn btn-link nav-link" type="submit">Bookings</button>
+                        <form action="#" method="post" th:action="@{/userPanel/bookings}">
+                            <button class="accordion btn btn-link nav-link" type="submit">Bookings</button>
                         </form>
                     </li>
                     <li class="nav-item">
@@ -29,3 +65,4 @@
         </nav>
     </div>
 </div>
+
