@@ -26,7 +26,7 @@ public class HomeController {
 
     @GetMapping("/fleet")
     public String showFleetView(Model model) {
-        model.addAttribute("cars", carManager.getCars());
+        model.addAttribute("cars", carManager.getActiveCars());
         return "main/fleet-list";
     }
 

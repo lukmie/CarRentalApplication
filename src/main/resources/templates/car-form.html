@@ -52,7 +52,6 @@
                                 <label style="font-weight: bold; font-size: 14px">DAILY FEE</label>
                                 <input class="form-control mb-3 col-4" placeholder="Daily fee" th:field="*{dailyFee}"
                                        type="text"/>
-
                                 <label style="font-weight: bold; font-size: 14px">DEPARTMENT</label>
                                 <select class="form-control mb-3 col-4" th:field="*{department}">
                                     <option value="">--</option>
@@ -60,26 +59,22 @@
                                             th:text="${dep.address}"
                                             th:value="${dep.id}"></option>
                                 </select>
-
                                 <label style="font-weight: bold; font-size: 14px">STATUS</label>
-                                <select class="form-control mb-3 col-4" name="position">
-                                    <option th:each="name : ${T(com.sda.carrentapp.entity.Status).values()}"
-                                            th:selected="${name == T(com.sda.carrentapp.entity.Status).AVAILABLE}"
-                                            th:text="${name}"
-                                            th:value="${name}">
+                                <select class="form-control mb-3 col-4" th:field="*{status}">
+                                    <option value="">--</option>
+                                    <option th:each="s : ${stat}"
+                                            th:text="${s.name()}"
+                                            th:value="${s.name()}">
                                     </option>
                                 </select>
-
-                                <label style="font-weight: bold; font-size: 14px">ENTITY STATUS</label>
-                                <select class="form-control mb-3 col-4" name="position">
-                                    <option th:each="name : ${T(com.sda.carrentapp.entity.EntityStatus).values()}"
-                                            th:selected="${name == T(com.sda.carrentapp.entity.EntityStatus).ACTIVE}"
-                                            th:text="${name}"
-                                            th:value="${name}">
-                                    </option>
-                                </select>
-
-
+                                <!--<label style="font-weight: bold; font-size: 14px">ENTITY STATUS</label>-->
+                                <!--<select class="form-control mb-3 col-4" name="position">-->
+                                <!--<option th:each="name : ${T(com.sda.carrentapp.entity.EntityStatus).values()}"-->
+                                <!--th:selected="${name == T(com.sda.carrentapp.entity.EntityStatus).ACTIVE}"-->
+                                <!--th:text="${name}"-->
+                                <!--th:value="${name}">-->
+                                <!--</option>-->
+                                <!--</select>-->
                                 <input class="btn btn-outline-secondary col-2 mt-1 mb-5" type="submit" value="Save"/>
                             </form>
                         </div>

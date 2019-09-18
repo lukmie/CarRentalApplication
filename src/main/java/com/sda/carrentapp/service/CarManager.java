@@ -1,6 +1,8 @@
 package com.sda.carrentapp.service;
 
-import com.sda.carrentapp.entity.*;
+import com.sda.carrentapp.entity.Car;
+import com.sda.carrentapp.entity.Department;
+import com.sda.carrentapp.entity.EntityStatus;
 import com.sda.carrentapp.entity.dto.CarDto;
 import com.sda.carrentapp.exception.CarNotFoundException;
 import com.sda.carrentapp.repository.CarRepository;
@@ -9,9 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class CarManager {
@@ -23,12 +23,16 @@ public class CarManager {
         this.departmentRepository = departmentRepository;
     }
 
-    public List<Car> getCars() {
+    public List<Car> getActiveCars() {
         return carRepository.findAllByEntityStatus(EntityStatus.ACTIVE);
     }
 
+    public List<Car> getCars() {
+        return carRepository.findAll();
+    }
+
     public Car getCarById(Long id) {
-        return carRepository.getOne(id);
+        return carRepository.findById(id).orElseThrow(CarNotFoundException::new);
     }
 
     public Set<Car> getCarsByRentDepAndDateAndStatus(LocalDate startDate, Department rentDepartment) {
@@ -43,36 +47,36 @@ public class CarManager {
 
     public void saveCar(CarDto carDto) {
         carDto.setEntityStatus(EntityStatus.ACTIVE);
-        carDto.setStatus(Status.AVAILABLE);
+//        carDto.setStatus(Status.AVAILABLE);
         Car car = CarMapper.toEntity(carDto);
         carRepository.save(car);
     }
 
-    public void delete(Long id) {
+    public void deleteCar(Long id) {
         Car car = carRepository.findById(id).orElseThrow(CarNotFoundException::new);
         car.setEntityStatus(EntityStatus.ARCHIVED);
         carRepository.save(car);
     }
 
-    public void patchCar(Long id, UpdateCarRequest updateCarRequest) {
-        Car car = carRepository.findById(id).orElseThrow(CarNotFoundException::new);
+//    public void patchCar(Long id, UpdateCarRequest updateCarRequest) {
+//        Car car = carRepository.findById(id).orElseThrow(CarNotFoundException::new);
+//
+//        Optional.ofNullable(updateCarRequest.getBrand()).ifPresent(car::setBrand);
+//        Optional.ofNullable(updateCarRequest.getModel()).ifPresent(car::setModel);
+//        Optional.ofNullable(updateCarRequest.getBodyType()).ifPresent(car::setBodyType);
+//        Optional.ofNullable(updateCarRequest.getProductionYear()).ifPresent(car::setProductionYear);
+//        Optional.ofNullable(updateCarRequest.getColor()).ifPresent(car::setColor);
+//        Optional.ofNullable(updateCarRequest.getMileage()).ifPresent(car::setMileage);
+//        Optional.ofNullable(updateCarRequest.getStatus()).ifPresent(car::setStatus);
+//        Optional.ofNullable(updateCarRequest.getDailyFee()).ifPresent(car::setDailyFee);
+//
+//        carRepository.save(car);
+//    }
 
-        Optional.ofNullable(updateCarRequest.getBrand()).ifPresent(car::setBrand);
-        Optional.ofNullable(updateCarRequest.getModel()).ifPresent(car::setModel);
-        Optional.ofNullable(updateCarRequest.getBodyType()).ifPresent(car::setBodyType);
-        Optional.ofNullable(updateCarRequest.getProductionYear()).ifPresent(car::setProductionYear);
-        Optional.ofNullable(updateCarRequest.getColor()).ifPresent(car::setColor);
-        Optional.ofNullable(updateCarRequest.getMileage()).ifPresent(car::setMileage);
-        Optional.ofNullable(updateCarRequest.getStatus()).ifPresent(car::setStatus);
-        Optional.ofNullable(updateCarRequest.getDailyFee()).ifPresent(car::setDailyFee);
-
-        carRepository.save(car);
-    }
-
-    public List<String> getAllBodyTypes() {
-        return carRepository.findAll().stream()
-                .map(Car::getBodyType)
-                .distinct()
-                .collect(Collectors.toList());
-    }
+//    public List<String> getAllBodyTypes() {
+//        return carRepository.findAll().stream()
+//                .map(Car::getBodyType)
+//                .distinct()
+//                .collect(Collectors.toList());
+//    }
 }

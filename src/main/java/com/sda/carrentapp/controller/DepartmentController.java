@@ -59,7 +59,7 @@ public class DepartmentController {
 
     @GetMapping("/cars")
     public String getCarsForDepartment(Model model) {
-        model.addAttribute("cars", carManager.getCars());
+        model.addAttribute("cars", carManager.getActiveCars());
         return "departments-cars";
     }
 

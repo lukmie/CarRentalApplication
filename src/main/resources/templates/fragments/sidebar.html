@@ -10,16 +10,15 @@
 
                     <li class="active nav-item">
                         <a aria-expanded="false" class="dropdown-toggle nav-link" data-toggle="collapse"
-                           href="#homeSubmenu">Home</a>
+                           href="#homeSubmenu">Cars</a>
                         <ul class="collapse list-unstyled" id="homeSubmenu">
                             <li>
-                                <a class="nav-link pl-4 ml-2" href="#" style="background-color: #e6e9ec">Home 1</a>
+                                <a class="nav-link pl-5" href="#" style="background-color: #e6e9ec" th:href="@{/cars}">All
+                                    cars</a>
                             </li>
                             <li>
-                                <a class="nav-link pl-4 ml-2" href="#" style="background-color: #e6e9ec">Home 2</a>
-                            </li>
-                            <li>
-                                <a class="nav-link pl-4 ml-2" href="#" style="background-color: #e6e9ec">Home 3</a>
+                                <a class="nav-link pl-5" href="#" style="background-color: #e6e9ec"
+                                   th:href="@{/cars/addCar}">New car</a>
                             </li>
                         </ul>
                     </li>
