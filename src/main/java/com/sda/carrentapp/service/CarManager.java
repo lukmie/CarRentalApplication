@@ -1,6 +1,7 @@
 package com.sda.carrentapp.service;
 
 import com.sda.carrentapp.entity.*;
+import com.sda.carrentapp.entity.dto.CarDto;
 import com.sda.carrentapp.exception.CarNotFoundException;
 import com.sda.carrentapp.repository.CarRepository;
 import com.sda.carrentapp.repository.DepartmentRepository;
@@ -34,10 +35,17 @@ public class CarManager {
         return carRepository.findAllByRentDepartmentAndDateAndStatus(startDate, rentDepartment);
     }
 
-    public void saveCar(CreateCarRequest carRequest) {
-        Car entity = CarMapper.map(carRequest);
-        entity.setEntityStatus(EntityStatus.ACTIVE);
-        carRepository.save(entity);
+//    public void saveCar(CreateCarRequest carRequest) {
+//        Car entity = CarMapper.map(carRequest);
+//        entity.setEntityStatus(EntityStatus.ACTIVE);
+//        carRepository.save(entity);
+//    }
+
+    public void saveCar(CarDto carDto) {
+        carDto.setEntityStatus(EntityStatus.ACTIVE);
+        carDto.setStatus(Status.AVAILABLE);
+        Car car = CarMapper.toEntity(carDto);
+        carRepository.save(car);
     }
 
     public void delete(Long id) {

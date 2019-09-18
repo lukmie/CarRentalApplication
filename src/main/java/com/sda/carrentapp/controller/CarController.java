@@ -1,10 +1,12 @@
 package com.sda.carrentapp.controller;
 
 import com.sda.carrentapp.entity.Car;
-import com.sda.carrentapp.entity.CreateCarRequest;
 import com.sda.carrentapp.entity.UpdateCarRequest;
 import com.sda.carrentapp.entity.UserBooking;
+import com.sda.carrentapp.entity.dto.CarDto;
 import com.sda.carrentapp.service.CarManager;
+import com.sda.carrentapp.service.DepartmentService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,16 +14,14 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
 
+@AllArgsConstructor
+
 @Controller
 @RequestMapping("/cars")
-public class CarRentController {
+public class CarController {
     private CarManager carManager;
     private UserBooking userBooking;
-
-    public CarRentController(CarManager carManager, UserBooking userBooking) {
-        this.carManager = carManager;
-        this.userBooking = userBooking;
-    }
+    private DepartmentService departmentService;
 
     @GetMapping
     public String getCars(Model model) {
@@ -31,17 +31,29 @@ public class CarRentController {
         return "cars";
     }
 
-    @GetMapping("/addRentDepartment")
-    String carAddView() {
-        return "addcar";
+    @GetMapping("/addCar")
+    public String addCarView(Model model) {
+        Car car = new Car();
+        model.addAttribute("departments", departmentService.getDepartments());
+        model.addAttribute("car", car);
+        return "car-form";
     }
 
-    @GetMapping("/edit/{id}")
-    public String editCarView(Model model, @PathVariable Long id) {
-        Car existingCar = carManager.getCarById(id);
-        model.addAttribute(existingCar);
-        return "editcar";
+    @PostMapping("/saveCar")
+    public String saveCar(@ModelAttribute("car") CarDto carDto) {
+        System.out.println("**************************" + carDto);
+        carManager.saveCar(carDto);
+        return "redirect:/cars";
     }
+
+    @GetMapping("/editCar/{id}")
+    public String editCarView(@PathVariable Long id, Model model) {
+        Car car = carManager.getCarById(id);
+        model.addAttribute("departments", departmentService.getDepartments());
+        model.addAttribute("car", car);
+        return "car-form";
+    }
+
 
     @PostMapping("/edit/{carNum}")
     public RedirectView editCat(@PathVariable Long carNum, UpdateCarRequest car) {
@@ -52,11 +64,11 @@ public class CarRentController {
         return redirectView;
     }
 
-    @PostMapping
-    public String createCar(CreateCarRequest carRequest) {
-        carManager.saveCar(carRequest);
-        return "redirect:/cars";
-    }
+//    @PostMapping
+//    public String createCar(CreateCarRequest carRequest) {
+//        carManager.saveCar(carRequest);
+//        return "redirect:/cars";
+//    }
 
     @PostMapping("/delete/{carNum}")
     public String deleteCar(@PathVariable("carNum") Car car) {

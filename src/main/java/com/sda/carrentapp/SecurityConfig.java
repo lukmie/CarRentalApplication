@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/fleet").permitAll()
                 .antMatchers("/branches").permitAll()
                 .antMatchers("/userPanel").hasRole("USER")
-                .antMatchers("/cars").hasAnyRole("ADMIN", "USER", "MANAGER", "EMPLOYEE")
+                .antMatchers("/cars").hasAnyRole("ADMIN", "MANAGER", "EMPLOYEE")
                 .antMatchers("/employees").hasRole("ADMIN")
                 .antMatchers("/departments").hasRole("ADMIN")
                 .and()

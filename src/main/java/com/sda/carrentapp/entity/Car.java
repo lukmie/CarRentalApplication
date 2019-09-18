@@ -30,9 +30,9 @@ public class Car {
     private Double dailyFee;
     private EntityStatus entityStatus;
 
-    @ManyToOne(cascade = {CascadeType.MERGE})
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     private Department department;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "car")
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "car")
     private List<Booking> bookings;
 }

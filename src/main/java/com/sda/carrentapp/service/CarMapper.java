@@ -2,6 +2,7 @@ package com.sda.carrentapp.service;
 
 import com.sda.carrentapp.entity.Car;
 import com.sda.carrentapp.entity.CreateCarRequest;
+import com.sda.carrentapp.entity.dto.CarDto;
 
 public class CarMapper {
     public static Car map(CreateCarRequest carRequest) {
@@ -14,6 +15,23 @@ public class CarMapper {
         car.setMileage(carRequest.getMileage());
         car.setStatus(carRequest.getStatus());
         car.setDailyFee(carRequest.getDailyFee());
+        return car;
+    }
+
+    public static Car toEntity(CarDto carDto) {
+        Car car = new Car();
+        car.setId(carDto.getId());
+        car.setBrand(carDto.getBrand());
+        car.setModel(carDto.getModel());
+        car.setBodyType(carDto.getBodyType());
+        car.setProductionYear(carDto.getProductionYear());
+        car.setColor(carDto.getColor());
+        car.setMileage(carDto.getMileage());
+        car.setStatus(carDto.getStatus());
+        car.setDailyFee(carDto.getDailyFee());
+        car.setEntityStatus(carDto.getEntityStatus());
+        car.setDepartment(carDto.getDepartment());
+        car.setBookings(carDto.getBookings());
         return car;
     }
 }
