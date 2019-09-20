@@ -24,6 +24,7 @@
                 <form action="#" class="mt-4" method="post" th:action="@{/employees/saveEmployee}"
                       th:object="${employee}">
                     <input th:field="*{id}" type="hidden"/>
+                    <input th:field="*{entityStatus}" type="hidden"/>
                     <label style="font-weight: bold; font-size: 14px">FIRST NAME</label>
                     <input class="form-control mb-3 col-4" placeholder="First name" required
                            th:field="*{firstName}"
@@ -32,14 +33,29 @@
                     <input class="form-control mb-3 col-4" placeholder="Last name" required
                            th:field="*{lastName}"
                            type="text"/>
+                    <label style="font-weight: bold; font-size: 14px">EMAIL</label>
+                    <input class="form-control mb-3 col-4" placeholder="Email" th:field="*{email}"
+                           type="email"/>
+                    <label style="font-weight: bold; font-size: 14px">ADDRESS</label>
+                    <input class="form-control mb-3 col-4" placeholder="Address" th:field="*{address}"
+                           type="text"/>
+                    <label style="font-weight: bold; font-size: 14px">USER NAME</label>
+                    <input class="form-control mb-3 col-4" placeholder="Address" th:field="*{username}"
+                           type="text"/>
+                    <label style="font-weight: bold; font-size: 14px">PASSWORD</label>
+                    <input class="form-control mb-3 col-4" placeholder="Address" th:field="*{password}"
+                           type="text"/>
+
                     <label style="font-weight: bold; font-size: 14px">POSITION</label>
-                    <select class="form-control mb-3 col-4" id="position" name="position">
-                        <option th:each="role : ${T(com.sda.carrentapp.entity.Role).values()}"
-                                th:selected="${role == T(com.sda.carrentapp.entity.Role).EMPLOYEE}"
-                                th:text="${role}"
-                                th:value="${role}">
+                    <select class="form-control mb-3 col-4" th:field="*{role}">
+                        <option value="">--</option>
+                        <option th:each="s : ${roles}"
+                                th:text="${s.name()}"
+                                th:value="${s.name()}">
                         </option>
                     </select>
+
+
                     <label style="font-weight: bold; font-size: 14px">DEPARTMENT</label>
                     <select class="form-control mb-3 col-4" th:field="*{department}">
                         <option value="">--</option>

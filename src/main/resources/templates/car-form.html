@@ -62,7 +62,7 @@
                                 <label style="font-weight: bold; font-size: 14px">STATUS</label>
                                 <select class="form-control mb-3 col-4" th:field="*{status}">
                                     <option value="">--</option>
-                                    <option th:each="s : ${stat}"
+                                    <option th:each="s : ${statuses}"
                                             th:text="${s.name()}"
                                             th:value="${s.name()}">
                                     </option>

@@ -36,7 +36,7 @@ public class CarController {
     public String addCarView(Model model) {
         Car car = new Car();
         List<Status> statusList = Stream.of(Status.values()).collect(Collectors.toList());
-        model.addAttribute("stat", statusList);
+        model.addAttribute("statuses", statusList);
         model.addAttribute("departments", departmentService.getDepartments());
         model.addAttribute("car", car);
         return "car-form";

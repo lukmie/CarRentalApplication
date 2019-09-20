@@ -25,8 +25,8 @@
 
                     <li class="nav-item">
                         <a aria-expanded="false" class="dropdown-toggle nav-link" data-toggle="collapse"
-                           href="#pageSubmenu">Departments</a>
-                        <ul class="collapse list-unstyled" id="pageSubmenu">
+                           href="#pageSubmenu1">Departments</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu1">
                             <li>
                                 <a class="nav-link pl-5" href="#" style="background-color: #e6e9ec"
                                    th:href="@{/departments}">Show departments</a>
@@ -34,6 +34,22 @@
                             <li>
                                 <a class="nav-link pl-5" href="#" style="background-color: #e6e9ec"
                                    th:href="@{/departments/addDepartment}">New department</a>
+                            </li>
+                        </ul>
+
+                    </li>
+
+                    <li class="nav-item">
+                        <a aria-expanded="false" class="dropdown-toggle nav-link" data-toggle="collapse"
+                           href="#pageSubmenu2">Employees</a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu2">
+                            <li>
+                                <a class="nav-link pl-5" href="#" style="background-color: #e6e9ec"
+                                   th:href="@{/employees}">Show employees</a>
+                            </li>
+                            <li>
+                                <a class="nav-link pl-5" href="#" style="background-color: #e6e9ec"
+                                   th:href="@{/employees/addEmployee}">New employee</a>
                             </li>
                         </ul>
                     </li>
