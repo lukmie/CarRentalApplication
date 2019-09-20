@@ -1,26 +1,29 @@
 package com.sda.carrentapp.controller;
 
+import com.sda.carrentapp.service.DepartmentService;
+import com.sda.carrentapp.service.EmployeeService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+@AllArgsConstructor
 
 @Controller
 @RequestMapping("/employees")
 public class EmployeeController {
 
-//    private EmployeeService employeeService;
-//    private DepartmentService departmentService;
-//
-//    public EmployeeController(EmployeeService employeeService, DepartmentService departmentService) {
-//        this.employeeService = employeeService;
-//        this.departmentService = departmentService;
-//    }
-//
-//    @GetMapping("")
-//    public String getEmployees(Model model) {
-//        model.addAttribute("employee", employeeService.getEmployees());
-//        return "employees";
-//    }
-//
+    private EmployeeService employeeService;
+    private DepartmentService departmentService;
+
+
+    @GetMapping
+    public String getEmployees(Model model) {
+        model.addAttribute("employees", employeeService.getEmployees());
+        return "employees";
+    }
+
 //    @GetMapping("/addEmployee")
 //    public String addEmployeeView(Model model) {
 //        Employee employee = new Employee();
@@ -65,8 +68,6 @@ public class EmployeeController {
 //        model.addAttribute("employee", employeeService.getEmployeeByID(id));
 //        return "employee-form";
 //    }
-
-
 
 
 }

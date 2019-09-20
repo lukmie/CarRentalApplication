@@ -33,6 +33,7 @@
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Position</th>
+                                <th>Department</th>
                                 <th>Status</th>
                                 <th class="text-center">Action</th>
                             </tr>
@@ -43,6 +44,7 @@
                                 <td class="pt-3" th:text="*{firstName}">Adam</td>
                                 <td class="pt-3" th:text="*{lastName}">Adamski</td>
                                 <td class="pt-3" th:text="*{role}">MANAGER</td>
+                                <td class="pt-3" th:text="*{department.address}">Gdańsk</td>
                                 <td class="pt-3" th:text="*{entityStatus}">ACTIVE</td>
                                 <td class="text-center pt-3">
                                     <a class="btn btn-outline-primary btn-sm" href="#"

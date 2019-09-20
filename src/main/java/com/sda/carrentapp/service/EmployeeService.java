@@ -1,20 +1,23 @@
 package com.sda.carrentapp.service;
 
+import com.sda.carrentapp.entity.User;
+import com.sda.carrentapp.repository.EmployeeRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
+@AllArgsConstructor
 
 @Service
 public class EmployeeService {
 
-//    private EmployeeRepository employeeRepository;
-//
-//    public EmployeeService(EmployeeRepository employeeRepository) {
-//        this.employeeRepository = employeeRepository;
-//    }
-//
-//    public List<Employee> getEmployees() {
-//        return employeeRepository.findAll();
-//    }
+    private EmployeeRepository employeeRepository;
+
+
+    public List<User> getEmployees() {
+        return employeeRepository.getAllEmployees();
+    }
 //
 //    public Employee getEmployeeByID(Long id) {
 //        return employeeRepository.getOne(id);

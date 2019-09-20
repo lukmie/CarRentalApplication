@@ -6,22 +6,18 @@ import com.sda.carrentapp.entity.EntityStatus;
 import com.sda.carrentapp.entity.dto.CarDto;
 import com.sda.carrentapp.exception.CarNotFoundException;
 import com.sda.carrentapp.repository.CarRepository;
-import com.sda.carrentapp.repository.DepartmentRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
+@AllArgsConstructor
+
 @Service
 public class CarManager {
     private CarRepository carRepository;
-    private DepartmentRepository departmentRepository;
-
-    public CarManager(CarRepository carRepository, DepartmentRepository departmentRepository) {
-        this.carRepository = carRepository;
-        this.departmentRepository = departmentRepository;
-    }
 
     public List<Car> getActiveCars() {
         return carRepository.findAllByEntityStatus(EntityStatus.ACTIVE);
@@ -31,12 +27,12 @@ public class CarManager {
         return carRepository.findAll();
     }
 
-    public Car getCarById(Long id) {
-        return carRepository.findById(id).orElseThrow(CarNotFoundException::new);
-    }
-
     public Set<Car> getCarsByRentDepAndDateAndStatus(LocalDate startDate, Department rentDepartment) {
         return carRepository.findAllByRentDepartmentAndDateAndStatus(startDate, rentDepartment);
+    }
+
+    public Car getCarById(Long id) {
+        return carRepository.findById(id).orElseThrow(CarNotFoundException::new);
     }
 
 //    public void saveCar(CreateCarRequest carRequest) {
@@ -47,7 +43,6 @@ public class CarManager {
 
     public void saveCar(CarDto carDto) {
         carDto.setEntityStatus(EntityStatus.ACTIVE);
-//        carDto.setStatus(Status.AVAILABLE);
         Car car = CarMapper.toEntity(carDto);
         carRepository.save(car);
     }

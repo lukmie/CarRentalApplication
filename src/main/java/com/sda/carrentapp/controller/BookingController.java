@@ -57,13 +57,10 @@ public class BookingController {
         return "booking";
     }
 
-    // todo: query cars by department, date and status
     @PostMapping("/booking/selectCar")
     public String carView(@ModelAttribute("userBooking") UserBooking userBooking, Model model) {
 //        userBooking.mapBooking(booking);
-        System.out.println("************************************" + userBooking.getStartDate() + "  " + userBooking.getRentDepartment());
         Set<Car> carsByRentDepAndDateAndStatus = carManager.getCarsByRentDepAndDateAndStatus(userBooking.getStartDate(), userBooking.getRentDepartment());
-        System.out.println("************************************" + carsByRentDepAndDateAndStatus);
         int days = Period.between(userBooking.getStartDate(), userBooking.getEndDate()).getDays();
         model.addAttribute("days", days);
         model.addAttribute("cars", carsByRentDepAndDateAndStatus);
