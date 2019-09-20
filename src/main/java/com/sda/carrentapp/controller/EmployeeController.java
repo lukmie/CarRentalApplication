@@ -3,17 +3,14 @@ package com.sda.carrentapp.controller;
 import com.sda.carrentapp.entity.Role;
 import com.sda.carrentapp.entity.User;
 import com.sda.carrentapp.entity.UserDTO;
+import com.sda.carrentapp.exception.EmployeeNotFoundException;
 import com.sda.carrentapp.service.DepartmentService;
 import com.sda.carrentapp.service.EmployeeService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -36,8 +33,8 @@ public class EmployeeController {
     @GetMapping("/addEmployee")
     public String addEmployeeView(Model model) {
         User employee = new User();
-        List<Role> roles = Stream.of(Role.EMPLOYEE, Role.MANAGER).collect(Collectors.toList());
-        model.addAttribute("roles", roles);
+
+        model.addAttribute("roles", Stream.of(Role.EMPLOYEE, Role.MANAGER).collect(Collectors.toList()));
         model.addAttribute("departments", departmentService.getDepartments());
         model.addAttribute("employee", employee);
         return "employee-form";
@@ -46,8 +43,15 @@ public class EmployeeController {
     @PostMapping("/saveEmployee")
     public String saveEmployee(@ModelAttribute("employee") UserDTO employeeDto) {
         employeeService.saveEmployee(employeeDto);
-//        return "redirect:/employees";
         return "redirect:/departments/employees/" + employeeDto.getDepartment().getId();
+    }
+
+    @GetMapping("/editEmployee/{id}")
+    public String updateEmployee(@PathVariable("id") Long id, Model model) throws EmployeeNotFoundException {
+        model.addAttribute("roles", Stream.of(Role.EMPLOYEE, Role.MANAGER).collect(Collectors.toList()));
+        model.addAttribute("departments", departmentService.getDepartments());
+        model.addAttribute("employee", employeeService.getEmployeeById(id));
+        return "employee-form";
     }
 
 //    @GetMapping("/deleteEmployee")
@@ -73,11 +77,6 @@ public class EmployeeController {
 //
 //    }
 //
-//    @GetMapping("/updateEmployee")
-//    public String updateEmployee(@RequestParam("id") Long id, Model model) throws EmployeeNotFoundException {
-//        model.addAttribute("employee", employeeService.getEmployeeByID(id));
-//        return "employee-form";
-//    }
 
 
 }

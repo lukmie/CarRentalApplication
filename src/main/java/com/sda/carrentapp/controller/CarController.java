@@ -52,7 +52,7 @@ public class CarController {
     public String editCarView(@PathVariable Long id, Model model) {
         Car car = carManager.getCarById(id);
 
-        model.addAttribute("stat", Stream.of(Status.values()).collect(Collectors.toList()));
+        model.addAttribute("statuses", Stream.of(Status.values()).collect(Collectors.toList()));
         model.addAttribute("departments", departmentService.getDepartments());
         model.addAttribute("car", car);
         return "car-form";

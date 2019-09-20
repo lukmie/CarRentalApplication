@@ -6,6 +6,7 @@ import com.sda.carrentapp.entity.UserDTO;
 import com.sda.carrentapp.entity.mapper.UserMapper;
 import com.sda.carrentapp.repository.EmployeeRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,11 +24,11 @@ public class EmployeeService {
     public List<User> getEmployees() {
         return employeeRepository.getAllEmployees();
     }
-//
-//    public Employee getEmployeeByID(Long id) {
-//        return employeeRepository.getOne(id);
-//    }
-//
+
+    public User getEmployeeById(Long id) {
+        return employeeRepository.findById(id).orElseThrow(() -> new UsernameNotFoundException("Employee with this id doesn't exist."));
+    }
+
 //    public void delete(Long id) {
 //        List<Employee> employees = getEmployees();
 //
