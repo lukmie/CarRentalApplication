@@ -1,4 +1,4 @@
-package com.sda.carrentapp;
+package com.sda.carrentapp.sacurity;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
