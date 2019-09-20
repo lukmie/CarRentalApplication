@@ -53,7 +53,7 @@ public class DepartmentController {
 
     @GetMapping("/employees/{id}")
     public String employeesForDepartmentView(@PathVariable("id") Long id, Model model) throws DepartmentNotFoundException {
-        model.addAttribute("employee", departmentService.getEmployeesForDepartment(id));
+        model.addAttribute("employees", departmentService.getEmployeesForDepartment(id));
         return "employees";
     }
 

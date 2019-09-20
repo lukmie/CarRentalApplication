@@ -5,19 +5,18 @@ import com.sda.carrentapp.entity.EntityStatus;
 import com.sda.carrentapp.entity.User;
 import com.sda.carrentapp.exception.DepartmentNotFoundException;
 import com.sda.carrentapp.repository.DepartmentRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@AllArgsConstructor
+
 @Service
 public class DepartmentService {
     private DepartmentRepository departmentRepository;
-
-    public DepartmentService(DepartmentRepository departmentRepository) {
-        this.departmentRepository = departmentRepository;
-    }
 
     public List<Department> getDepartments() {
         return departmentRepository.findAllByEntityStatus(EntityStatus.ACTIVE);
