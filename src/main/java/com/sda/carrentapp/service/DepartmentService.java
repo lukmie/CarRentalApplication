@@ -1,5 +1,6 @@
 package com.sda.carrentapp.service;
 
+import com.sda.carrentapp.entity.Car;
 import com.sda.carrentapp.entity.Department;
 import com.sda.carrentapp.entity.EntityStatus;
 import com.sda.carrentapp.entity.User;
@@ -43,6 +44,13 @@ public class DepartmentService {
         return getDepartmentById(id).getUsers()
                 .stream()
                 .sorted(Comparator.comparing(User::getId))
+                .collect(Collectors.toList());
+    }
+
+    public List<Car> getCarsForDepartment(Long id) throws DepartmentNotFoundException {
+        return getDepartmentById(id).getCars()
+                .stream()
+                .sorted(Comparator.comparing(Car::getId))
                 .collect(Collectors.toList());
     }
 

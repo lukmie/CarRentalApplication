@@ -45,6 +45,10 @@
                                             <button class="btn btn-outline-info btn-sm" type="submit">Employees</button>
                                         </form>
                                         <form class="pl-1" method="get"
+                                              th:action="@{|departments/cars/${department.id}|}">
+                                            <button class="btn btn-outline-info btn-sm" type="submit">Cars</button>
+                                        </form>
+                                        <form class="pl-1" method="get"
                                               th:action="@{|departments/updateDepartment/${department.id}|}">
                                             <button class="btn btn-outline-primary btn-sm" type="submit">Edit</button>
                                         </form>
