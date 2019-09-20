@@ -24,9 +24,10 @@ public interface CarRepository extends JpaRepository<Car, Long> {
     @Query("select c from cars c left join c.bookings b where " +
             "c.department = :rentDepFromForm and " +
             "c.status = 'AVAILABLE' " +
-//            "or b.startDate <= :bookingEndDateFromForm)")
-            "and (b.startDate < :bookingEndDateFromForm or b.startDate = null)")
-    Set<Car> findAllByRentDepartmentAndDateAndStatus(@Param("bookingEndDateFromForm") LocalDate c,
+            "and (b.endDate < :bookingStartDateFromForm or b.endDate = null)")
+//            "and (b.startDate < :bookingEndDateFromForm or b.startDate = null)")
+//SELECT cars.id FROM cars left join bookings on cars.id = bookings.car_id where cars.status = 'AVAILABLE' and cars.department_id = 1 or bookings.ENTITY_STATUS =0 and (bookings.end_date < '2019-09-28' and bookings.start_date < '2019-09-28' or bookings.start_date > '2019-09-24' and bookings.end_date > '2019-09-24')
+    Set<Car> findAllByRentDepartmentAndDateAndStatus(@Param("bookingStartDateFromForm") LocalDate c,
                                                      @Param("rentDepFromForm") Department rentDepFromForm);
 
     List<Car> findAllByDepartment(Department department);

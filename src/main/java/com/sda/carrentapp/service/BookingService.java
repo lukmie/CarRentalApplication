@@ -67,17 +67,15 @@ public class BookingService {
         userBooking.setReservationDate(LocalDate.now());
         userBooking.setEntityStatus(EntityStatus.ACTIVE);
 
-        //todo: in future change to Spring Security, now user is hardcoded
         Optional<User> userByUsername = userRepository.getUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         userBooking.setUser(userByUsername.get());
 
 //        double fee = calculateFee(userBooking.getCar(), userBooking);
 //        userBooking.setFee(fee);
         userBooking.setCar(userBooking.getCar());
-        userBooking.getCar().setStatus(Status.RENT);
+//        userBooking.getCar().setStatus(Status.RENT);
 
-        // todo check if this line can be here, or it should happened when employee takes back a car
-        userBooking.getCar().setDepartment(userBooking.getReturnDepartment());
+//        userBooking.getCar().setDepartment(userBooking.getReturnDepartment());
 
         bookingRepository.save(BookingMapper.toEntity(userBooking));
     }

@@ -40,9 +40,9 @@ public class InitialDataLoader {
         Department department2 = Department.builder().address("Gdańsk").rentalOffice(rentalOffice).entityStatus(EntityStatus.ACTIVE).build();
         Department department3 = Department.builder().address("Sopot").rentalOffice(rentalOffice).entityStatus(EntityStatus.ACTIVE).build();
         Department department4 = Department.builder().address("Warszawa").rentalOffice(rentalOffice).entityStatus(EntityStatus.ACTIVE).build();
-        Department unsign = Department.builder().address("unsign").rentalOffice(rentalOffice).entityStatus(EntityStatus.ARCHIVED).build();
+        Department department5 = Department.builder().address("unsign").rentalOffice(rentalOffice).entityStatus(EntityStatus.ARCHIVED).build();
 
-        List<Department> departments = new ArrayList<>(Arrays.asList(department1, department2, department3, department4, unsign));
+        List<Department> departments = new ArrayList<>(Arrays.asList(department1, department2, department3, department4, department5));
         departments.forEach(departmentRepository::save);
 
         Car car1 = Car.builder()
@@ -53,7 +53,7 @@ public class InitialDataLoader {
                 .color("grey")
                 .mileage(87_000d)
                 .status(Status.AVAILABLE)
-                .dailyFee(35.50)
+                .dailyFee(35.00)
                 .department(department1)
                 .entityStatus(EntityStatus.ACTIVE)
                 .build();
@@ -66,7 +66,7 @@ public class InitialDataLoader {
                 .color("blue")
                 .mileage(36_500d)
                 .status(Status.AVAILABLE)
-                .dailyFee(20.50)
+                .dailyFee(20.00)
                 .department(department1)
                 .entityStatus(EntityStatus.ACTIVE)
                 .build();
@@ -79,7 +79,7 @@ public class InitialDataLoader {
                 .color("black")
                 .mileage(40_800d)
                 .status(Status.AVAILABLE)
-                .dailyFee(30.20)
+                .dailyFee(30.00)
                 .department(department2)
                 .entityStatus(EntityStatus.ACTIVE)
                 .build();
@@ -92,7 +92,7 @@ public class InitialDataLoader {
                 .color("grey")
                 .mileage(83_200d)
                 .status(Status.AVAILABLE)
-                .dailyFee(35.50)
+                .dailyFee(39.00)
                 .department(department2)
                 .entityStatus(EntityStatus.ACTIVE)
                 .build();
@@ -105,7 +105,7 @@ public class InitialDataLoader {
                 .color("grey")
                 .mileage(87_000d)
                 .status(Status.AVAILABLE)
-                .dailyFee(35.50)
+                .dailyFee(49.00)
                 .department(department3)
                 .entityStatus(EntityStatus.ACTIVE)
                 .build();
@@ -118,7 +118,7 @@ public class InitialDataLoader {
                 .color("silver")
                 .mileage(25_300d)
                 .status(Status.AVAILABLE)
-                .dailyFee(52.30)
+                .dailyFee(59.00)
                 .department(department3)
                 .entityStatus(EntityStatus.ACTIVE)
                 .build();
@@ -131,7 +131,7 @@ public class InitialDataLoader {
                 .color("white")
                 .mileage(35_300d)
                 .status(Status.AVAILABLE)
-                .dailyFee(82.30)
+                .dailyFee(82.00)
                 .department(department4)
                 .entityStatus(EntityStatus.ACTIVE)
                 .build();
@@ -144,7 +144,7 @@ public class InitialDataLoader {
                 .color("black")
                 .mileage(55_300d)
                 .status(Status.AVAILABLE)
-                .dailyFee(62.30)
+                .dailyFee(62.00)
                 .department(department4)
                 .entityStatus(EntityStatus.ACTIVE)
                 .build();
@@ -154,13 +154,13 @@ public class InitialDataLoader {
 
         User user1 = User.builder()
                 .firstName("Adam")
-                .lastName("Małysz")
-                .email("amalysz@gmail.com")
+                .lastName("Adamski")
+                .email("aadamski@gmail.com")
                 .role(Role.USER)
-                .username("adam1")
-                .password(encoder.encode("malys"))
+                .username("adam")
+                .password(encoder.encode("adamski"))
                 .address("Kraków")
-                .department(unsign)
+                .department(department5)
                 .entityStatus(EntityStatus.ACTIVE)
                 .build();
 
@@ -172,7 +172,7 @@ public class InitialDataLoader {
                 .username("anna")
                 .password(encoder.encode("nowak"))
                 .address("Gdańsk")
-                .department(unsign)
+                .department(department5)
                 .entityStatus(EntityStatus.ACTIVE)
                 .build();
 
@@ -184,12 +184,12 @@ public class InitialDataLoader {
                 .username("marta")
                 .password(encoder.encode("kowalska"))
                 .address("Sopot")
-                .department(unsign)
+                .department(department5)
                 .entityStatus(EntityStatus.ACTIVE)
                 .build();
 
         Booking booking1 = Booking.builder()
-                .reservationDate(LocalDate.now().minusDays(3))
+                .reservationDate(LocalDate.now().minusDays(10))
                 .startDate(LocalDate.now().minusDays(2))
                 .endDate(LocalDate.now().minusDays(1))
                 .fee(200d)
@@ -197,11 +197,11 @@ public class InitialDataLoader {
                 .returnDepartment(department2)
                 .user(user1)
                 .car(car1)
-                .entityStatus(EntityStatus.ACTIVE)
+                .entityStatus(EntityStatus.ARCHIVED)
                 .build();
 
         Booking booking2 = Booking.builder()
-                .reservationDate(LocalDate.now().minusDays(13))
+                .reservationDate(LocalDate.now().minusDays(23))
                 .startDate(LocalDate.now().minusDays(12))
                 .endDate(LocalDate.now().minusDays(11))
                 .fee(300d)
@@ -209,19 +209,19 @@ public class InitialDataLoader {
                 .returnDepartment(department3)
                 .user(user2)
                 .car(car2)
-                .entityStatus(EntityStatus.ACTIVE)
+                .entityStatus(EntityStatus.ARCHIVED)
                 .build();
 
         Booking booking3 = Booking.builder()
-                .reservationDate(LocalDate.now().minusDays(3))
-                .startDate(LocalDate.now().minusDays(2))
-                .endDate(LocalDate.now().minusDays(1))
+                .reservationDate(LocalDate.now().minusDays(13))
+                .startDate(LocalDate.now().minusDays(14))
+                .endDate(LocalDate.now().minusDays(10))
                 .fee(400d)
                 .rentDepartment(department2)
                 .returnDepartment(department3)
                 .user(user3)
                 .car(car5)
-                .entityStatus(EntityStatus.ACTIVE)
+                .entityStatus(EntityStatus.ARCHIVED)
                 .build();
 
         bookingRepository.save(booking1);
@@ -230,88 +230,126 @@ public class InitialDataLoader {
 
         User employee1 = User.builder()
                 .firstName("Jacek")
-                .lastName("Herrmann")
-                .email("jherrmann@email.com")
+                .lastName("Her")
+                .email("jh@email.com")
+                .address("Gdańsk")
                 .role(Role.ADMIN)
+                .entityStatus(EntityStatus.ACTIVE)
                 .username("jacek")
                 .password(encoder.encode("jacek"))
-                .address("Gdańsk")
-                .entityStatus(EntityStatus.ACTIVE)
+                .department(department5)
                 .build();
 
         User employee2 = User.builder()
                 .firstName("Lukasz")
                 .lastName("Mie")
                 .email("lm@email.com")
+                .address("Gdańsk")
                 .role(Role.ADMIN)
+                .entityStatus(EntityStatus.ACTIVE)
                 .username("lukasz")
                 .password(encoder.encode("lukasz"))
-                .address("Gdańsk")
-                .entityStatus(EntityStatus.ACTIVE)
+                .department(department5)
                 .build();
 
         User employee3 = User.builder()
                 .firstName("Michał")
                 .lastName("Miler")
-                .role(Role.EMPLOYEE)
-                .username("michal")
-                .password(encoder.encode("miler"))
-                .department(department2)
+                .email("mm@email.com")
+                .address("Kraków")
+                .role(Role.MANAGER)
                 .entityStatus(EntityStatus.ACTIVE)
+                .username("michal")
+                .password(encoder.encode("michal"))
+                .department(department1)
                 .build();
 
         User employee4 = User.builder()
                 .firstName("Marcin")
-                .lastName("Baczyński")
+                .lastName("Bacz")
+                .email("mb@email.com")
+                .address("Kraków")
                 .role(Role.EMPLOYEE)
-                .username("marcin")
-                .password(encoder.encode("baczynski"))
-                .department(department2)
                 .entityStatus(EntityStatus.ACTIVE)
+                .username("marcin")
+                .password(encoder.encode("marcin"))
+                .department(department1)
                 .build();
 
         User employee5 = User.builder()
                 .firstName("Andrzej")
-                .lastName("Ponitka")
-                .role(Role.EMPLOYEE)
-                .username("andrzej")
-                .password(encoder.encode("ponitka"))
-                .department(department3)
+                .lastName("Pon")
+                .email("ap@email.com")
+                .address("Gdańsk")
+                .role(Role.MANAGER)
                 .entityStatus(EntityStatus.ACTIVE)
+                .username("andrzej")
+                .password(encoder.encode("andrzej"))
+                .department(department2)
                 .build();
 
         User employee6 = User.builder()
                 .firstName("Szymon")
                 .lastName("Nowak")
+                .email("sn@email.com")
+                .address("Gdańsk")
                 .role(Role.EMPLOYEE)
-                .username("szymon")
-                .password(encoder.encode("nowak"))
-                .department(department3)
                 .entityStatus(EntityStatus.ACTIVE)
+                .username("szymon")
+                .password(encoder.encode("szymon"))
+                .department(department2)
                 .build();
 
         User employee7 = User.builder()
                 .firstName("Monika")
                 .lastName("Malek")
-                .role(Role.EMPLOYEE)
-                .username("monika")
-                .password(encoder.encode("malek"))
-                .department(department4)
+                .email("mm@email.com")
+                .address("Sopot")
+                .role(Role.MANAGER)
                 .entityStatus(EntityStatus.ACTIVE)
+                .username("monika")
+                .password(encoder.encode("monika"))
+                .department(department3)
                 .build();
 
         User employee8 = User.builder()
                 .firstName("Patryk")
                 .lastName("Nowicki")
+                .email("pn@email.com")
+                .address("Sopot")
                 .role(Role.EMPLOYEE)
-                .username("patryk")
-                .password(encoder.encode("nowicki"))
-                .department(department4)
                 .entityStatus(EntityStatus.ACTIVE)
+                .username("patryk")
+                .password(encoder.encode("patryk"))
+                .department(department3)
+                .build();
+
+        User employee9 = User.builder()
+                .firstName("Paweł")
+                .lastName("Kowalski")
+                .email("pk@email.com")
+                .address("Warszawa")
+                .role(Role.MANAGER)
+                .entityStatus(EntityStatus.ACTIVE)
+                .username("pawel")
+                .password(encoder.encode("pawel"))
+                .department(department4)
+                .build();
+
+        User employee10 = User.builder()
+                .firstName("Marian")
+                .lastName("Kowalewski")
+                .email("pn@email.com")
+                .address("Warszawa")
+                .role(Role.EMPLOYEE)
+                .entityStatus(EntityStatus.ACTIVE)
+                .username("marian")
+                .password(encoder.encode("marian"))
+                .department(department4)
                 .build();
 
         List<User> employees = new ArrayList<>
-                (Arrays.asList(employee1, employee2, employee3, employee4, employee5, employee6, employee7, employee8));
+                (Arrays.asList(employee1, employee2, employee3, employee4, employee5, employee6, employee7, employee8, employee9, employee10));
 
         employees.forEach(employeeRepository::save);
     }

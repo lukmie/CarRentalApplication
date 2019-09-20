@@ -21,7 +21,7 @@ public class UserController {
     private UserService userService;
     private BookingService bookingService;
 
-    @GetMapping("")
+    @GetMapping
     public String getUsers(Model model) {
         model.addAttribute("users", userService.getUsers());
         return "users";

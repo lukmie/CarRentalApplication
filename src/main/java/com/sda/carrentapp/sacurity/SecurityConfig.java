@@ -23,6 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/login-form", "/register").permitAll()
                 .antMatchers("/booking/selectDateAndLocation").permitAll()
                 .antMatchers("/booking/selectCar").permitAll()
+                .antMatchers("/booking/selectCar/**").hasRole("USER")
                 .antMatchers("/booking/allBookings").hasAnyRole("ADMIN", "MANAGER", "EMPLOYEE")
                 .antMatchers("/fleet").permitAll()
                 .antMatchers("/branches").permitAll()

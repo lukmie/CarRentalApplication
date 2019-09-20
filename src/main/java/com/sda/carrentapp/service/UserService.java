@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -41,7 +42,10 @@ public class UserService implements UserDetailsService {
     }
 
     public List<User> getUsers() {
-        return userRepository.findAllByEntityStatus(EntityStatus.ACTIVE);
+        return userRepository.findAllByEntityStatus(EntityStatus.ACTIVE)
+                .stream()
+                .filter(u -> u.getRole().equals(Role.USER))
+                .collect(Collectors.toList());
     }
 
     public User getUserById(Long id) throws UserNotFoundException {
