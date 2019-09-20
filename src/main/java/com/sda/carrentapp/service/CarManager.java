@@ -27,8 +27,8 @@ public class CarManager {
         return carRepository.findAll();
     }
 
-    public Set<Car> getCarsByRentDepAndDateAndStatus(LocalDate startDate, Department rentDepartment) {
-        return carRepository.findAllByRentDepartmentAndDateAndStatus(startDate, rentDepartment);
+    public Set<Car> getCarsByRentDepAndDateAndStatus(LocalDate startDate, LocalDate endDate, Department rentDepartment) {
+        return carRepository.findAllByRentDepartmentAndDateAndStatus(startDate, endDate, rentDepartment);
     }
 
     public Car getCarById(Long id) {

@@ -60,7 +60,7 @@ public class BookingController {
     @PostMapping("/booking/selectCar")
     public String carView(@ModelAttribute("userBooking") UserBooking userBooking, Model model) {
 //        userBooking.mapBooking(booking);
-        Set<Car> carsByRentDepAndDateAndStatus = carManager.getCarsByRentDepAndDateAndStatus(userBooking.getStartDate(), userBooking.getRentDepartment());
+        Set<Car> carsByRentDepAndDateAndStatus = carManager.getCarsByRentDepAndDateAndStatus(userBooking.getStartDate(), userBooking.getEndDate(), userBooking.getRentDepartment());
         int days = Period.between(userBooking.getStartDate(), userBooking.getEndDate()).getDays();
         model.addAttribute("days", days);
         model.addAttribute("cars", carsByRentDepAndDateAndStatus);
