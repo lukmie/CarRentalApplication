@@ -43,6 +43,7 @@ public class DepartmentService {
     public List<User> getEmployeesForDepartment(Long id) throws DepartmentNotFoundException {
         return getDepartmentById(id).getUsers()
                 .stream()
+                .filter(e -> e.getEntityStatus().equals(EntityStatus.ACTIVE))
                 .sorted(Comparator.comparing(User::getId))
                 .collect(Collectors.toList());
     }
