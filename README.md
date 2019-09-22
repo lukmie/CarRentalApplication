@@ -4,8 +4,16 @@ Spring MVC application designed for car rental company as a final project in SDA
 ## Features
 Not authorized user can access home page, see available branches and cars, and beside those login and registration panel.
 
-**Common user(ROLE_USER)
--
+**Authorized user can:**
+- Book a car at the selected date and localization;
+- Access bookings, where he can edit or delete order;
+- Change account settings.
+
+**Admin(manager) can:**
+- Add new and modify existing cars;
+- Add new and modify existing departments;
+- Add new and modify existing employees and users;
+- Start and finish reservation of a car.
 
 ## Built With
 * Spring Boot 2.1.8
