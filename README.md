@@ -17,6 +17,8 @@ Not authorized user can access home page, see available branches and cars, and b
 - Add new and modify existing employees and users;
 - Start and finish reservation of a car.
 
+... and many more, full description will be added soon.
+
 ## Built With
 * Spring Boot 2.1.8
 * Spring Security
