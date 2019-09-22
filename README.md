@@ -1,4 +1,7 @@
 # CarRentalApplication
+Spring MVC application designed for car rental company as a final project in SDA Academy. 
+
+**Features**
 
 ## Built With
 * Spring Boot 2.1.8
