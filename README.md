@@ -1,7 +1,11 @@
 # CarRentalApplication
-Spring MVC application designed for car rental company as a final project in SDA Academy. 
+Spring MVC application designed for car rental company as a final project in SDA Academy.
 
-**Features**
+## Features
+Not authorized user can access home page, see available branches and cars, and beside those login and registration panel.
+
+**Common user(ROLE_USER)
+-
 
 ## Built With
 * Spring Boot 2.1.8
