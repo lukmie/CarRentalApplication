@@ -1,10 +1,11 @@
 # CarRentalApplication
 
 ## Built With
-* Spring Boot
+* Spring Boot 2.1.8
 * Spring Security
-* H2 database
+* Spring MVC
+* H2 database 1.4.199
 * Maven 
-* Thymeleaf
-* Bootstrap
-* Lombok
+* Thymeleaf 3.0.9
+* Bootstrap 4
+* Lombok 1.18.8
