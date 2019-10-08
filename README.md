@@ -1,4 +1,6 @@
 # CarRentalApplication
+
+<img src="https://github.com/lukmie/CarRentalApplication/blob/master/src/main/resources/static/img/main.PNG" width="800"/>
 Spring MVC application designed for car rental company as a final project in SDA Academy.
 
 ## Features
@@ -14,6 +16,8 @@ Not authorized user can access home page, see available branches and cars, and b
 - Add new and modify existing departments;
 - Add new and modify existing employees and users;
 - Start and finish reservation of a car.
+
+... and many more, full description will be added soon.
 
 ## Built With
 * Spring Boot 2.1.8
