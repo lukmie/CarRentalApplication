@@ -6,7 +6,7 @@ import com.sda.carrentapp.entity.UserBooking;
 import com.sda.carrentapp.entity.dto.CarDto;
 import com.sda.carrentapp.service.CarManager;
 import com.sda.carrentapp.service.DepartmentService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -15,14 +15,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 
 @Controller
 @RequestMapping("/cars")
 public class CarController {
-    private CarManager carManager;
-    private UserBooking userBooking;
-    private DepartmentService departmentService;
+    private final CarManager carManager;
+    private final UserBooking userBooking;
+    private final DepartmentService departmentService;
 
     @GetMapping
     public String getCars(Model model) {
