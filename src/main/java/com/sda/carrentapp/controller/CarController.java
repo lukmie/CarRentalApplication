@@ -64,32 +64,4 @@ public class CarController {
         return "redirect:/cars";
     }
 
-//    @PostMapping("/edit/{carNum}")
-//    public RedirectView editCat(@PathVariable Long carNum, UpdateCarRequest car) {
-//        carManager.patchCar(carNum, car);
-//        RedirectView redirectView = new RedirectView();
-//        redirectView.setUrl("/cars");
-//
-//        return redirectView;
-//    }
-
-//    @PostMapping
-//    public String createCar(CreateCarRequest carRequest) {
-//        carManager.saveCar(carRequest);
-//        return "redirect:/cars";
-//    }
-
-
-
-//    @PutMapping("/{id}")
-//    public ResponseEntity updateCar(@PathVariable("id") Long id, @RequestBody UpdateCarRequest updateCarRequest) {
-//        carManager.updateCar(id, updateCarRequest);
-//        return new ResponseEntity(HttpStatus.OK);
-//    }
-
-//    @PatchMapping("/{id}")
-//    public String patchCar(@PathVariable("id") Long id, UpdateCarRequest updateCarRequest) {
-//        carManager.patchCar(id, updateCarRequest);
-//        return "redirect:/cars";
-//    }
 }
