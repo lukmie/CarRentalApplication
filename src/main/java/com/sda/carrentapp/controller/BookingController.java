@@ -1,7 +1,10 @@
 package com.sda.carrentapp.controller;
 
 import com.sda.carrentapp.common.Message;
-import com.sda.carrentapp.entity.*;
+import com.sda.carrentapp.entity.Car;
+import com.sda.carrentapp.entity.Role;
+import com.sda.carrentapp.entity.User;
+import com.sda.carrentapp.entity.UserBooking;
 import com.sda.carrentapp.exception.BookingNotFoundException;
 import com.sda.carrentapp.exception.RentStartDateIsNullException;
 import com.sda.carrentapp.exception.UserNotFoundException;
@@ -19,8 +22,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.time.Period;
-import java.util.List;
-import java.util.Set;
 
 @RequiredArgsConstructor
 
@@ -34,25 +35,21 @@ public class BookingController {
 
     @GetMapping("/booking/allBookings")
     public String bookingsView(Model model) {
-        model.addAttribute("booked", bookingService.getBookings());
+        model.addAttribute("bookings", bookingService.getBookings());
         return "bookings";
     }
 
     @GetMapping("/booking/selectDateAndLocation")
     public String bookingView(Model model) {
-        UserBooking userBooking = new UserBooking();
-        List<Department> departments = departmentService.getDepartments();
-        model.addAttribute("userBooking", userBooking);
-        model.addAttribute("departments", departments);
+        model.addAttribute("userBooking", new UserBooking());
+        model.addAttribute("departments", departmentService.getDepartments());
         return "booking";
     }
 
     @PostMapping("/booking/selectCar")
     public String carView(@ModelAttribute("userBooking") UserBooking userBooking, Model model) {
-        Set<Car> carsByRentDepAndDateAndStatus = carManager.getCarsByRentDepAndDateAndStatus(userBooking.getStartDate(), userBooking.getEndDate(), userBooking.getRentDepartment());
-        int days = Period.between(userBooking.getStartDate(), userBooking.getEndDate()).getDays();
-        model.addAttribute("days", days);
-        model.addAttribute("cars", carsByRentDepAndDateAndStatus);
+        model.addAttribute("days", Period.between(userBooking.getStartDate(), userBooking.getEndDate()).getDays());
+        model.addAttribute("cars", carManager.getCarsByRentDepAndDateAndStatus(userBooking.getStartDate(), userBooking.getEndDate(), userBooking.getRentDepartment()));
         model.addAttribute("userBooking", userBooking);
         return "cars";
     }

@@ -48,7 +48,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="booking: ${booked}" th:object="${booking}">
+                            <tr th:each="booking: ${bookings}" th:object="${booking}">
                                 <td class="pt-3"
                                     sec:authorize="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER', 'ROLE_EMPLOYEE')"
                                     th:text="*{id}">1
