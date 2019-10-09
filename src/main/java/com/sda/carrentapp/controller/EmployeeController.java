@@ -8,7 +8,7 @@ import com.sda.carrentapp.entity.UserDTO;
 import com.sda.carrentapp.exception.UserNotFoundException;
 import com.sda.carrentapp.service.DepartmentService;
 import com.sda.carrentapp.service.EmployeeService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,14 +17,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 
 @Controller
 @RequestMapping("/employees")
 public class EmployeeController {
 
-    private EmployeeService employeeService;
-    private DepartmentService departmentService;
+    private final EmployeeService employeeService;
+    private final DepartmentService departmentService;
 
     @GetMapping
     public String getEmployees(Model model) {
@@ -34,10 +34,9 @@ public class EmployeeController {
 
     @GetMapping("/addEmployee")
     public String addEmployeeView(Model model) {
-        User employee = new User();
         model.addAttribute("roles", Stream.of(Role.EMPLOYEE, Role.MANAGER).collect(Collectors.toList()));
         model.addAttribute("departments", departmentService.getDepartments());
-        model.addAttribute("employee", employee);
+        model.addAttribute("employee", new User());
         return "employee-form";
     }
 
@@ -59,7 +58,7 @@ public class EmployeeController {
     public String deleteEmployee(@PathVariable("id") Long id, Model model) throws UserNotFoundException {
         User employeeById = employeeService.getEmployeeById(id);
         List<User> employees = employeeService.getEmployees();
-        long count = employees.stream()
+        long amountOfManagersInDep = employees.stream()
                 .filter(e -> e.getRole().equals(Role.MANAGER))
                 .filter(e -> e.getDepartment().getId().equals(employeeById.getDepartment().getId()))
                 .filter(e -> e.getEntityStatus().equals(EntityStatus.ACTIVE))
@@ -70,7 +69,7 @@ public class EmployeeController {
             employeeService.delete(id);
             return "redirect:/departments/employees/" + departmentId;
         }
-        if (employeeById.getRole().equals(Role.MANAGER) && count >= 2) {
+        if (employeeById.getRole().equals(Role.MANAGER) && amountOfManagersInDep >= 2) {
             employeeService.delete(id);
             return "redirect:/departments/employees/" + departmentId;
         } else {
