@@ -3,22 +3,20 @@ package com.sda.carrentapp.controller;
 import com.sda.carrentapp.entity.Department;
 import com.sda.carrentapp.entity.UserBooking;
 import com.sda.carrentapp.exception.DepartmentNotFoundException;
-import com.sda.carrentapp.service.CarManager;
 import com.sda.carrentapp.service.DepartmentService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 
 @Controller
 @RequestMapping("/departments")
 public class DepartmentController {
 
-    private DepartmentService departmentService;
-    private CarManager carManager;
-    private UserBooking userBooking;
+    private final DepartmentService departmentService;
+    private final UserBooking userBooking;
 
     @GetMapping
     public String getDepartments(Model model) {
@@ -28,8 +26,7 @@ public class DepartmentController {
 
     @GetMapping("/addDepartment")
     public String addDepartmentView(Model model) {
-        Department department = new Department();
-        model.addAttribute("department", department);
+        model.addAttribute("department", new Department());
         return "department-form";
     }
 
@@ -63,6 +60,4 @@ public class DepartmentController {
         model.addAttribute("userBooking", userBooking);
         return "cars";
     }
-
-
 }
