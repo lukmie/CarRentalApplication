@@ -3,7 +3,7 @@ package com.sda.carrentapp.controller;
 import com.sda.carrentapp.entity.Role;
 import com.sda.carrentapp.entity.UserDTO;
 import com.sda.carrentapp.service.UserService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -14,18 +14,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 
 @Controller
 @RequestMapping("/register")
 public class RegisterController {
 
-    private UserService userService;
+    private final UserService userService;
 
     @GetMapping
     public String getRegistrations(Model model) {
-        UserDTO user = new UserDTO();
-        model.addAttribute("user", user);
+        model.addAttribute("user", new UserDTO());
         return "register-form";
     }
 
