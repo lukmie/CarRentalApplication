@@ -11,6 +11,7 @@ import com.sda.carrentapp.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -58,6 +59,11 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new UserNotFoundException("User not found with userName: " + userName));
     }
 
+    public User getLoggedInUser() throws UserNotFoundException {
+        return userRepository.findUserByUsername(getUserNameFromContextHolder())
+                .orElseThrow(() -> new UserNotFoundException("User not found with userName: " + getUserNameFromContextHolder()));
+    }
+
     public Optional<User> getOptionalUserByUserName(String userName) {
         return userRepository.findUserByUsername(userName);
     }
@@ -91,5 +97,9 @@ public class UserService implements UserDetailsService {
     private Collection<? extends GrantedAuthority> parseRoles(Role roles) {
         return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + roles.name()));
 
+    }
+
+    private String getUserNameFromContextHolder() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 }
