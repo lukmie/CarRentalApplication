@@ -56,6 +56,7 @@ public class BookingController {
 
     @PostMapping("/booking/selectCar/{id}")
     public String addCarToBooking(@PathVariable Long id, @ModelAttribute("userBooking") UserBooking userBooking, Model model) throws UserNotFoundException {
+        //fixme do metody
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
         User user = userService.getUserByUserName(userName);
 
@@ -107,7 +108,7 @@ public class BookingController {
 
     private void bookingsViewModelAttributes(Model model) throws UserNotFoundException {
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-        model.addAttribute("booked", bookingService.getAllBookingsByUserName(userName));
+        model.addAttribute("bookings", bookingService.getAllBookingsByUserName(userName));
         model.addAttribute("user", userService.getUserByUserName(userName));
         model.addAttribute("username", userName);
     }

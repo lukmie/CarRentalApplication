@@ -5,6 +5,7 @@ import com.sda.carrentapp.exception.BookingNotFoundException;
 import com.sda.carrentapp.exception.UserNotFoundException;
 import com.sda.carrentapp.service.BookingService;
 import com.sda.carrentapp.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,23 +14,19 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@RequiredArgsConstructor
+
 @Controller
 @RequestMapping("/userPanel")
 public class UserPanelController {
 
-    private UserService userService;
-    private BookingService bookingService;
-
-    public UserPanelController(UserService userService, BookingService bookingService) {
-        this.userService = userService;
-        this.bookingService = bookingService;
-    }
+    private final UserService userService;
+    private final BookingService bookingService;
 
     @RequestMapping("/accountSettings")
     public String showUserSettings(Model model) throws UserNotFoundException {
-        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-        model.addAttribute("user", userService.getUserByUserName(userName));
-        model.addAttribute("username", userName);
+        model.addAttribute("user", userService.getLoggedInUser());
+        model.addAttribute("username", userService.getLoggedInUser().getUsername());
         return "user-form";
     }
 
@@ -48,8 +45,7 @@ public class UserPanelController {
 
     private void bookingsViewModelAttributes(Model model) throws UserNotFoundException {
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-        model.addAttribute("booked", bookingService.getAllBookingsByUserName(userName));
+        model.addAttribute("bookings", bookingService.getAllBookingsByUserName(userName));
         model.addAttribute("user", userService.getUserByUserName(userName));
-        model.addAttribute("username", userName);
     }
 }
