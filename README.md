@@ -18,13 +18,17 @@ Spring MVC application designed for car rental company as a final project in Sof
 #### 1.1 Access to main page
 <img src="https://github.com/lukmie/CarRentalApplication/blob/master/src/main/resources/static/img/unauthorized-main.PNG" width="800"/>
 
-#### 1.2 Access to sign-up page
+#### 1.2 Access to sign up page
 <img src="https://github.com/lukmie/CarRentalApplication/blob/master/src/main/resources/static/img/sign-up.PNG" width="800"/>
 
 #### 1.3 Account with given username already exist error
 <img src="https://github.com/lukmie/CarRentalApplication/blob/master/src/main/resources/static/img/sign-up-error.PNG" width="800"/>
 
-Not authorized user can access home page, see available branches and cars, and beside those login and registration panel.
+#### 1.4 Access to sign in page
+<img src="https://github.com/lukmie/CarRentalApplication/blob/master/src/main/resources/static/img/sign-in.PNG" width="800"/>
+
+#### 1.5 Access to fleet and branches
+Not authorized user can view available cars and find location of the branch.
 
 **Authorized user can:**
 - Book a car at the selected date and localization;
