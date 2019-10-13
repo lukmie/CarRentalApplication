@@ -30,6 +30,9 @@ Spring MVC application designed for car rental company as a final project in Sof
 #### 1.5 Access to fleet and branches
 Not authorized user can view available cars and find location of the branch.
 
+
+
+
 **Authorized user can:**
 - Book a car at the selected date and localization;
 - Access bookings, where he can edit or delete order;
