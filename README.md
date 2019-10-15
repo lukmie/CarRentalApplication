@@ -21,7 +21,7 @@ Spring MVC application designed for car rental company as a final project in Sof
 #### 1.2 Access to sign up page
 <img src="https://github.com/lukmie/CarRentalApplication/blob/master/src/main/resources/static/img/sign-up.PNG" width="800"/>
 
-#### 1.3 Account with given username already exist error
+#### 1.3 Username already exist error(login must be unique)
 <img src="https://github.com/lukmie/CarRentalApplication/blob/master/src/main/resources/static/img/sign-up-error.PNG" width="800"/>
 
 #### 1.4 Access to sign in page
